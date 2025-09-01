@@ -239,9 +239,9 @@
             const scrollTop = window.scrollY;
             const scrollPercent = Math.min(scrollTop / window.innerHeight, 1);
 
-            // Use a more subtle zoom on mobile to reduce cropping and blur
+            // Compromise: Disable zoom on mobile to prevent exaggerating the crop.
             const isMobile = window.innerWidth < 768;
-            const zoomFactor = isMobile ? 0.35 : 0.75;
+            const zoomFactor = isMobile ? 0 : 0.75;
             const scale = 1 + scrollPercent * zoomFactor;
             
             // Opacity from 1 to 0
