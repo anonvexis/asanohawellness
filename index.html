@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IM+Fell+Double+Pica:ital@0;1&display=swap" rel="stylesheet">
     <style>
         /* Custom styles to extend Tailwind */
         body {
@@ -15,35 +15,40 @@
             background-color: #0b0a18; /* Deeper, richer navy-purple */
             color: #E5E7EB; /* Light gray text for contrast */
         }
-        .font-stamp {
-            font-family: 'Special Elite', cursive;
+        .font-ancient {
+            font-family: 'IM Fell Double Pica', serif;
         }
         /* New color palette inspired by the hero image */
         .bg-surface { background-color: #1a182d; } /* Dark purple slate for cards/sections */
         .text-muted { color: #94a3b8; } /* Muted slate color for secondary text */
 
-        /* Hero section styles for zoom effect */
+        /* Hero section styles for video background */
         #hero-sticky-container {
             position: sticky;
             top: 0;
             height: 100vh;
             overflow: hidden;
+            background-color: #0b0a18; /* Fallback background color */
         }
-        #hero-background {
-            background-image: url('https://iili.io/Kf6NzmB.jpg');
-            background-position: center;
-            background-size: cover;
-            width: 100%;
-            height: 100%;
+        #hero-video-wrapper {
             position: absolute;
-            top: 0;
-            left: 0;
-            will-change: transform; /* Performance hint for the browser */
-            transform-origin: center 55%; /* Set the zoom's focal point to the geometry's center */
+            top: 50%;
+            left: 50%;
+            width: 100vw;
+            height: 100vh;
+            transform: translate(-50%, -50%) scale(1.7); /* Initial zoom */
+            z-index: 1;
+            transition: transform 0.2s ease-out; /* Smooth transition for the zoom effect */
         }
-        #page-content {
+        #hero-content-overlay {
             position: relative;
             z-index: 10;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text readability */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         /* Helper for cropping the provided brand image sprite */
@@ -60,10 +65,10 @@
         }
         
         .brand-pattern-bg {
-            background-image: url('http://googleusercontent.com/file_content/0');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
+            /* Using a subtle, repeating SVG pattern */
+            background-image: url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2394a3b8' fill-opacity='0.1' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zm-1 0h1L0 4V3zm-2 0h1v1L0 3V2zm-1 0h1V1L0 2V1zm3 2h1v1L0 5V4zm1-1h1v1L0 6V5z'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 6px 6px;
         }
 
         /* Animation for elements */
@@ -86,11 +91,32 @@
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
 
-        @media (max-width: 768px) {
-            #hero-background {
-                background-image: url('https://iili.io/Kfst4gs.png'); /* Vertical image for mobile */
-                transform-origin: center center; /* Re-center zoom on mobile */
-            }
+        .product-image {
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* Glow effect for logo and button */
+        .glow-effect {
+            filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.6));
+            transition: filter 0.3s ease-in-out;
+        }
+        .glow-effect:hover {
+            filter: drop-shadow(0 0 15px rgba(251, 191, 36, 0.8));
+        }
+
+        /* Liquid Glass effect for cards */
+        .liquid-glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease-in-out;
+        }
+        .liquid-glass-card:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -123,12 +149,26 @@
     </header>
 
     <main>
-        <!-- Container to define the scroll-zoom duration -->
-        <div id="zoom-container" style="height: 200vh;">
-            <div id="hero-sticky-container">
-                <div id="hero-background"></div>
-                <div id="hero-content-overlay" class="relative z-10 h-full flex items-center justify-center text-white text-center">
-                    
+        <!-- Hero Section with Video Background -->
+        <div id="hero-sticky-container">
+            <!-- Wrapper for the video to apply the zoom effect -->
+            <div id="hero-video-wrapper">
+                <iframe id="youtube-video"
+                    src="https://www.youtube.com/embed/4OiXfDdbtnM?autoplay=1&mute=1&loop=1&playlist=4OiXfDdbtnM&controls=0&modestbranding=1&start=180"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    class="w-full h-full object-cover">
+                </iframe>
+            </div>
+            
+            <div id="hero-content-overlay" class="relative h-full flex items-center justify-center text-white text-center">
+                <div class="max-w-2xl px-4" id="hero-title-container">
+                    <!-- Asanoha Symbol -->
+                    <img src="https://iili.io/KfbleKg.png" alt="Asanoha symbol" class="w-40 h-40 mx-auto mb-4 fade-in-up glow-effect">
+                    <h1 class="text-5xl md:text-6xl font-bold font-ancient tracking-wide mb-4 fade-in-up">ASANOHA WELLNESS</h1>
+                    <p class="text-lg md:text-xl text-gray-200 mb-8 fade-in-up delay-1">Sun Purified Himalayan Shilajit Resin</p>
+                    <a href="#" class="inline-block px-8 py-4 bg-orange-400 text-black font-semibold rounded-full shadow-lg hover:bg-orange-300 transition-colors duration-300 fade-in-up delay-2 glow-effect">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -139,9 +179,9 @@
             <section class="bg-surface">
                 <!-- Product Image -->
                 <div>
-                    <img src="https://iili.io/Kf4lZAJ.jpg" alt="Sun Purified Himalayan Shilajit in a jar on a dark slate surface" class="w-full h-auto">
+                    <img src="https://iili.io/KftsGHJ.jpg" alt="Sun Purified Himalayan Shilajit in a jar on a dark slate surface" class="product-image w-full h-auto">
                 </div>
-                 <!-- Product Details -->
+                <!-- Product Details -->
                 <div class="container mx-auto px-4 sm:px-6 py-16 md:py-24 text-center">
                     <div class="max-w-3xl mx-auto">
                         <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 fade-in-up">Sourced from pristine altitudes, our Shilajit is a testament to nature's potency. We use an ancient sun-purification process to ensure you receive the purest and most powerful form of this Himalayan treasure.</p>
@@ -159,6 +199,7 @@
                                 <span class="font-semibold">Sourced from 16,000 ft</span>
                             </div>
                         </div>
+                         <a href="#" class="mt-8 inline-block px-8 py-4 bg-orange-400 text-black font-semibold rounded-full shadow-lg hover:bg-orange-300 transition-colors duration-300 fade-in-up delay-2">Buy Now</a>
                     </div>
                 </div>
             </section>
@@ -170,7 +211,7 @@
                     <p class="max-w-3xl mx-auto text-muted mb-12 fade-in-up delay-1">Himalayan Shilajit is a legendary substance, revered for centuries for its profound impact on health and well-being. Discover the benefits that await.</p>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Benefit 1: Energy -->
-                        <div class="bg-surface p-6 md:p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-1">
+                        <div class="liquid-glass-card p-6 md:p-8 rounded-lg hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-1">
                             <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-700 mx-auto mb-4">
                                 <svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
@@ -178,7 +219,7 @@
                             <p class="text-muted">Naturally boosts mitochondrial function, improving energy production at a cellular level for sustained vitality.</p>
                         </div>
                         <!-- Benefit 2: Fulvic Acid -->
-                        <div class="bg-surface p-6 md:p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-2">
+                        <div class="liquid-glass-card p-6 md:p-8 rounded-lg hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-2">
                             <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-700 mx-auto mb-4">
                                 <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             </div>
@@ -186,7 +227,7 @@
                             <p class="text-muted">Helps transport minerals and nutrients into your cells, enhancing absorption and promoting detoxification.</p>
                         </div>
                         <!-- Benefit 3: Brain Health -->
-                        <div class="bg-surface p-6 md:p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-3">
+                        <div class="liquid-glass-card p-6 md:p-8 rounded-lg hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-3">
                             <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-700 mx-auto mb-4">
                                 <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                             </div>
@@ -203,11 +244,22 @@
                 <div class="container mx-auto px-4 sm:px-6 relative z-10 text-center">
                     <div class="max-w-3xl mx-auto">
                         <!-- Brand logo again -->
-                         <div class="logo-container mx-auto mb-6 fade-in-up">
-                             <img src="http://googleusercontent.com/file_content/0" alt="Asanoha Wellness Logo" onerror="this.onerror=null;this.src='https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS';">
+                        <div class="logo-container mx-auto mb-6 fade-in-up">
+                            <img src="https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS" alt="Asanoha Wellness Logo" onerror="this.onerror=null;this.src='https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS';">
                         </div>
                         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in-up delay-1">Purity in Every Drop</h2>
                         <p class="text-muted leading-relaxed fade-in-up delay-2">At Asanoha Wellness, our philosophy is simple: nature provides the ultimate path to well-being. We honor this by using a time-honored, sun-driven purification process, avoiding harsh solvents and high heat. This gentle method preserves the vital nutrients of Shilajit, ensuring you receive a product that is as pure and powerful as the mountains it came from.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Call to Action Section -->
+            <section class="py-16 md:py-24 bg-black bg-opacity-30">
+                <div class="container mx-auto px-4 sm:px-6 text-center">
+                    <div class="max-w-2xl mx-auto">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in-up">Ready to Elevate Your Wellness?</h2>
+                        <p class="text-lg md:text-xl text-muted mb-8 fade-in-up delay-1">Experience the pure, natural power of Himalayan Shilajit.</p>
+                        <a href="#" class="inline-block px-10 py-5 bg-orange-400 text-black font-bold rounded-full shadow-lg hover:bg-orange-300 transition-colors duration-300 transform hover:scale-105 fade-in-up delay-2">Shop Now</a>
                     </div>
                 </div>
             </section>
@@ -231,32 +283,38 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // JavaScript for scroll-zoom effect
-        const heroBg = document.getElementById('hero-background');
-        const heroContent = document.getElementById('hero-content-overlay');
-
+        // JavaScript for scroll-zoom and fade effect
+        const videoWrapper = document.getElementById('hero-video-wrapper');
+        const heroTitleContainer = document.getElementById('hero-title-container');
+        
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY;
             const scrollPercent = Math.min(scrollTop / window.innerHeight, 1);
 
-            // Compromise: Disable zoom on mobile to prevent exaggerating the crop.
-            const isMobile = window.innerWidth < 768;
-            const zoomFactor = isMobile ? 0 : 0.75;
-            const scale = 1 + scrollPercent * zoomFactor;
+            // Interpolate the scale from 1.7 to 1.2 based on scroll percentage
+            const scale = 1.7 - (scrollPercent * 0.5);
             
             // Opacity from 1 to 0
-            const opacity = 1 - scrollPercent * 1;
+            const opacity = 1 - scrollPercent * 1.5;
 
             requestAnimationFrame(() => {
-                if (heroBg) {
-                    heroBg.style.transform = `scale(${scale})`;
+                if (videoWrapper) {
+                    videoWrapper.style.transform = `translate(-50%, -50%) scale(${scale})`;
                 }
-                if (heroContent) {
-                    heroContent.style.opacity = Math.max(0, opacity);
+                if (heroTitleContainer) {
+                    heroTitleContainer.style.opacity = Math.max(0, opacity);
                 }
             });
+        });
+
+        // Initial fade-in of the hero title
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                heroTitleContainer.style.opacity = 1;
+            }, 500);
         });
 
     </script>
 </body>
 </html>
+
