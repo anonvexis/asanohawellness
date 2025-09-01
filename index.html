@@ -29,26 +29,17 @@
             height: 100vh;
             overflow: hidden;
         }
-        .hero-bg-element {
+        #hero-background {
             background-image: url('https://iili.io/Kf6NzmB.jpg');
             background-position: center;
+            background-size: cover;
             width: 100%;
             height: 100%;
             position: absolute;
             top: 0;
             left: 0;
             will-change: transform; /* Performance hint for the browser */
-        }
-        #hero-background {
-            background-size: contain; /* Always show the full image */
-            background-repeat: no-repeat;
             transform-origin: center 55%; /* Set the zoom's focal point to the geometry's center */
-        }
-        #hero-background-blur {
-            display: block; /* Show blurred background on all screens */
-            background-size: cover;
-            filter: blur(20px) brightness(0.6);
-            transform: scale(1.1); /* Scale slightly to hide blurred edges */
         }
         #page-content {
             position: relative;
@@ -97,6 +88,7 @@
 
         @media (max-width: 768px) {
             #hero-background {
+                background-image: url('https://iili.io/Kfst4gs.png'); /* Vertical image for mobile */
                 transform-origin: center center; /* Re-center zoom on mobile */
             }
         }
@@ -134,8 +126,7 @@
         <!-- Container to define the scroll-zoom duration -->
         <div id="zoom-container" style="height: 200vh;">
             <div id="hero-sticky-container">
-                <div id="hero-background-blur" class="hero-bg-element"></div>
-                <div id="hero-background" class="hero-bg-element"></div>
+                <div id="hero-background"></div>
                 <div id="hero-content-overlay" class="relative z-10 h-full flex items-center justify-center text-white text-center">
                     
                 </div>
@@ -242,7 +233,6 @@
 
         // JavaScript for scroll-zoom effect
         const heroBg = document.getElementById('hero-background');
-        const heroBgBlur = document.getElementById('hero-background-blur');
         const heroContent = document.getElementById('hero-content-overlay');
 
         window.addEventListener('scroll', () => {
@@ -261,10 +251,6 @@
                 if (heroBg) {
                     heroBg.style.transform = `scale(${scale})`;
                 }
-                if (heroBgBlur) {
-                    const blurScale = 1.1 * scale;
-                    heroBgBlur.style.transform = `scale(${blurScale})`;
-                }
                 if (heroContent) {
                     heroContent.style.opacity = Math.max(0, opacity);
                 }
@@ -274,8 +260,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
