@@ -93,17 +93,11 @@
 
         @media (max-width: 768px) {
             #hero-background {
+                background-image: url('https://iili.io/Kfst4gs.png'); /* Vertical image for mobile */
                 transform-origin: center center; /* Re-center zoom on mobile */
-                background-size: contain; /* Show the full image */
-                background-repeat: no-repeat;
+                background-size: cover; /* Cover works great with a vertical image */
             }
-            #hero-background-blur {
-                display: block; /* Show the blurred background on mobile */
-                background-size: cover;
-                filter: blur(20px) brightness(0.6);
-                /* Scale slightly larger to hide blurred edges */
-                transform: scale(1.1);
-            }
+            /* The blur div is not needed on mobile now */
         }
     </style>
 </head>
@@ -247,7 +241,6 @@
 
         // JavaScript for scroll-zoom effect
         const heroBg = document.getElementById('hero-background');
-        const heroBgBlur = document.getElementById('hero-background-blur');
         const heroContent = document.getElementById('hero-content-overlay');
 
         window.addEventListener('scroll', () => {
@@ -266,10 +259,6 @@
                 if (heroBg) {
                     heroBg.style.transform = `scale(${scale})`;
                 }
-                if (isMobile && heroBgBlur) {
-                    const blurScale = 1.1 * scale;
-                    heroBgBlur.style.transform = `scale(${blurScale})`;
-                }
                 if (heroContent) {
                     heroContent.style.opacity = Math.max(0, opacity);
                 }
@@ -279,4 +268,6 @@
     </script>
 </body>
 </html>
+
+
 
