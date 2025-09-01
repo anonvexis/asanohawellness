@@ -12,19 +12,15 @@
         /* Custom styles to extend Tailwind */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark slate background */
-            color: #F3F4F6; /* Light gray text for contrast */
+            background-color: #0b0a18; /* Deeper, richer navy-purple */
+            color: #E5E7EB; /* Light gray text for contrast */
         }
         .font-stamp {
             font-family: 'Special Elite', cursive;
         }
-        /* Color palette from the brand guide */
-        .asanoha-gold { color: #D4AF37; }
-        .asanoha-slate { color: #334155; }
-        .asanoha-blue { color: #2A3A5B; }
-        .bg-asanoha-slate { background-color: #334155; }
-        .bg-asanoha-blue { background-color: #2A3A5B; }
-        .bg-dark-slate { background-color: #1F2937; }
+        /* New color palette inspired by the hero image */
+        .bg-surface { background-color: #1a182d; } /* Dark purple slate for cards/sections */
+        .text-muted { color: #94a3b8; } /* Muted slate color for secondary text */
 
         /* Hero section styles for zoom effect */
         #hero-sticky-container {
@@ -43,6 +39,7 @@
             top: 0;
             left: 0;
             will-change: transform; /* Performance hint for the browser */
+            transform-origin: center 55%; /* Set the zoom's focal point to the geometry's center */
         }
         #page-content {
             position: relative;
@@ -94,18 +91,14 @@
 
     <!-- Header -->
     <header class="absolute top-0 left-0 right-0 z-20 py-4 px-6 md:px-12">
-        <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo -->
-            <div class="logo-container">
-                 <img src="http://googleusercontent.com/file_content/0" alt="Asanoha Wellness Logo" onerror="this.onerror=null;this.src='https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS';">
-            </div>
-
+        <div class="container mx-auto flex justify-end items-center">
+            
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="#" class="text-white hover:text-yellow-300 transition duration-300">Shop</a>
-                <a href="#" class="text-white hover:text-yellow-300 transition duration-300">Our Story</a>
-                <a href="#" class="text-white hover:text-yellow-300 transition duration-300">Benefits</a>
-                <a href="#" class="text-white hover:text-yellow-300 transition duration-300">FAQ</a>
+                <a href="#" class="text-gray-200 hover:text-orange-400 transition duration-300">Shop</a>
+                <a href="#" class="text-gray-200 hover:text-orange-400 transition duration-300">Our Story</a>
+                <a href="#" class="text-gray-200 hover:text-orange-400 transition duration-300">Benefits</a>
+                <a href="#" class="text-gray-200 hover:text-orange-400 transition duration-300">FAQ</a>
             </nav>
 
             <!-- Mobile Menu Button -->
@@ -114,11 +107,11 @@
             </button>
         </div>
         <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="hidden md:hidden bg-asanoha-blue/90 absolute top-full right-0 w-full">
-            <a href="#" class="block text-white text-center py-3 hover:bg-asanoha-slate">Shop</a>
-            <a href="#" class="block text-white text-center py-3 hover:bg-asanoha-slate">Our Story</a>
-            <a href="#" class="block text-white text-center py-3 hover:bg-asanoha-slate">Benefits</a>
-            <a href="#" class="block text-white text-center py-3 hover:bg-asanoha-slate">FAQ</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-surface/90 absolute top-full right-0 w-full">
+            <a href="#" class="block text-white text-center py-3 hover:bg-slate-700">Shop</a>
+            <a href="#" class="block text-white text-center py-3 hover:bg-slate-700">Our Story</a>
+            <a href="#" class="block text-white text-center py-3 hover:bg-slate-700">Benefits</a>
+            <a href="#" class="block text-white text-center py-3 hover:bg-slate-700">FAQ</a>
         </div>
     </header>
 
@@ -136,32 +129,27 @@
         <!-- The rest of the page content -->
         <div id="page-content">
             <!-- Product Section -->
-            <section class="py-16 md:py-24 bg-dark-slate">
-                <div class="container mx-auto px-6">
-                    <div class="grid md:grid-cols-2 gap-12 items-center">
-                        <!-- Product Image -->
-                        <div class="fade-in-up">
-                            <div class="bg-gray-800 p-8 rounded-lg shadow-lg">
-                               <img src="https://iili.io/Kf4lZAJ.jpg" alt="Sun Purified Himalayan Shilajit" class="rounded-lg w-full h-auto mx-auto max-w-md" onerror="this.onerror=null;this.src='https://placehold.co/600x600/334155/ffffff?text=Product+Jar';">
+            <section class="bg-surface">
+                <!-- Product Image -->
+                <div>
+                    <img src="https://iili.io/Kf4lZAJ.jpg" alt="Sun Purified Himalayan Shilajit in a jar on a dark slate surface" class="w-full h-auto">
+                </div>
+                 <!-- Product Details -->
+                <div class="container mx-auto px-6 py-16 md:py-24 text-center">
+                    <div class="max-w-3xl mx-auto">
+                        <p class="text-lg md:text-xl text-gray-300 leading-relaxed mb-12 fade-in-up">Sourced from pristine altitudes, our Shilajit is a testament to nature's potency. We use an ancient sun-purification process to ensure you receive the purest and most powerful form of this Himalayan treasure.</p>
+                        <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 text-gray-200 fade-in-up delay-1">
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-orange-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <span class="font-semibold">84+ Trace Minerals</span>
                             </div>
-                        </div>
-                        <!-- Product Details -->
-                        <div class="fade-in-up delay-1">
-                            <h2 class="font-stamp text-3xl md:text-4xl text-gray-100 mb-4">SUN PURIFIED HIMALAYAN SHILAJIT</h2>
-                            <p class="text-gray-400 mb-8 leading-relaxed">Sourced from pristine altitudes, our Shilajit is a testament to nature's potency. We use an ancient sun-purification process to ensure you receive the purest and most powerful form of this Himalayan treasure.</p>
-                            <div class="space-y-4 text-gray-300">
-                                <div class="flex items-center">
-                                    <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                    <span>Contains <span class="font-bold text-white">84+ Essential Trace Minerals</span></span>
-                                </div>
-                                <div class="flex items-center">
-                                    <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                    <span>Naturally <span class="font-bold text-white">Boosts Energy & Vitality</span></span>
-                                </div>
-                                <div class="flex items-center">
-                                     <svg class="w-6 h-6 text-yellow-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
-                                    <span>Sustainably Sourced from <span class="font-bold text-white">16,000 ft</span></span>
-                                </div>
+                            <div class="flex items-center">
+                                <svg class="w-6 h-6 text-orange-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <span class="font-semibold">Boosts Energy & Vitality</span>
+                            </div>
+                            <div class="flex items-center">
+                                 <svg class="w-6 h-6 text-orange-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 15l7-7 7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></svg>
+                                <span class="font-semibold">Sourced from 16,000 ft</span>
                             </div>
                         </div>
                     </div>
@@ -172,38 +160,38 @@
             <section class="py-16 md:py-24 bg-black bg-opacity-20">
                 <div class="container mx-auto px-6 text-center">
                     <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in-up">The Gifts of the Mountains</h2>
-                    <p class="max-w-3xl mx-auto text-gray-400 mb-12 fade-in-up delay-1">Himalayan Shilajit is a legendary substance, revered for centuries for its profound impact on health and well-being. Discover the benefits that await.</p>
+                    <p class="max-w-3xl mx-auto text-muted mb-12 fade-in-up delay-1">Himalayan Shilajit is a legendary substance, revered for centuries for its profound impact on health and well-being. Discover the benefits that await.</p>
                     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         <!-- Benefit 1: Energy -->
-                        <div class="bg-dark-slate p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-yellow-500/10 transition-shadow duration-300 fade-in-up delay-1">
-                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-gray-700 mx-auto mb-4">
-                                <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        <div class="bg-surface p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-1">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-700 mx-auto mb-4">
+                                <svg class="w-8 h-8 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-2">Enhanced Energy Levels</h3>
-                            <p class="text-gray-400">Naturally boosts mitochondrial function, improving energy production at a cellular level for sustained vitality.</p>
+                            <p class="text-muted">Naturally boosts mitochondrial function, improving energy production at a cellular level for sustained vitality.</p>
                         </div>
                         <!-- Benefit 2: Fulvic Acid -->
-                        <div class="bg-dark-slate p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-yellow-500/10 transition-shadow duration-300 fade-in-up delay-2">
-                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-gray-700 mx-auto mb-4">
-                                <svg class="w-8 h-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <div class="bg-surface p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-2">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-700 mx-auto mb-4">
+                                <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-2">Rich in Fulvic Acid</h3>
-                            <p class="text-gray-400">Helps transport minerals and nutrients into your cells, enhancing absorption and promoting detoxification.</p>
+                            <p class="text-muted">Helps transport minerals and nutrients into your cells, enhancing absorption and promoting detoxification.</p>
                         </div>
                         <!-- Benefit 3: Brain Health -->
-                        <div class="bg-dark-slate p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-yellow-500/10 transition-shadow duration-300 fade-in-up delay-3">
-                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-gray-700 mx-auto mb-4">
-                                <svg class="w-8 h-8 text-yellow-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+                        <div class="bg-surface p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-orange-400/10 transition-shadow duration-300 fade-in-up delay-3">
+                            <div class="flex items-center justify-center h-16 w-16 rounded-full bg-slate-700 mx-auto mb-4">
+                                <svg class="w-8 h-8 text-orange-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
                             </div>
                             <h3 class="text-xl font-bold text-white mb-2">Supports Brain Health</h3>
-                            <p class="text-gray-400">Contains compounds that may help improve cognitive function, memory, and protect against cognitive decline.</p>
+                            <p class="text-muted">Contains compounds that may help improve cognitive function, memory, and protect against cognitive decline.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Brand Story Section -->
-            <section class="py-16 md:py-24 relative overflow-hidden bg-dark-slate">
+            <section class="py-16 md:py-24 relative overflow-hidden bg-surface">
                 <div class="absolute inset-0 brand-pattern-bg opacity-5 z-0"></div>
                 <div class="container mx-auto px-6 relative z-10 text-center">
                     <div class="max-w-3xl mx-auto">
@@ -212,7 +200,7 @@
                              <img src="http://googleusercontent.com/file_content/0" alt="Asanoha Wellness Logo" onerror="this.onerror=null;this.src='https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS';">
                         </div>
                         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in-up delay-1">Purity in Every Drop</h2>
-                        <p class="text-gray-400 leading-relaxed fade-in-up delay-2">At Asanoha Wellness, our philosophy is simple: nature provides the ultimate path to well-being. We honor this by using a time-honored, sun-driven purification process, avoiding harsh solvents and high heat. This gentle method preserves the vital nutrients of Shilajit, ensuring you receive a product that is as pure and powerful as the mountains it came from.</p>
+                        <p class="text-muted leading-relaxed fade-in-up delay-2">At Asanoha Wellness, our philosophy is simple: nature provides the ultimate path to well-being. We honor this by using a time-honored, sun-driven purification process, avoiding harsh solvents and high heat. This gentle method preserves the vital nutrients of Shilajit, ensuring you receive a product that is as pure and powerful as the mountains it came from.</p>
                     </div>
                 </div>
             </section>
@@ -220,7 +208,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
+    <footer class="bg-black bg-opacity-20 text-white py-12">
         <div class="container mx-auto px-6 text-center">
             <p>&copy; 2024 Asanoha Wellness. All Rights Reserved.</p>
             <p class="text-sm text-gray-500 mt-2">Elevate Your Wellness Journey.</p>
@@ -245,9 +233,9 @@
             const scrollPercent = Math.min(scrollTop / window.innerHeight, 1);
 
             // Scale from 1 to 1.5 as user scrolls
-            const scale = 1 + scrollPercent * 5;
+            const scale = 1 + scrollPercent * .75;
             // Opacity from 1 to 0
-            const opacity = 1 - scrollPercent * 1.5;
+            const opacity = 1 - scrollPercent * 1;
 
             requestAnimationFrame(() => {
                 if (heroBg) {
@@ -262,3 +250,7 @@
     </script>
 </body>
 </html>
+
+
+
+
