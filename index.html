@@ -14,6 +14,7 @@
             font-family: 'Inter', sans-serif;
             background-color: #0b0a18; /* Deeper, richer navy-purple */
             color: #E5E7EB; /* Light gray text for contrast */
+            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
         }
         .font-stamp {
             font-family: 'Special Elite', cursive;
@@ -91,6 +92,14 @@
                 background-image: url('https://iili.io/Kfst4gs.png'); /* Vertical image for mobile */
                 transform-origin: center center; /* Re-center zoom on mobile */
             }
+            #hero-sticky-container {
+                position: relative; /* Disable sticky behavior on mobile */
+                height: auto;
+            }
+            .logo-container {
+                width: 200px; /* Scale logo for smaller screens */
+                height: 80px;
+            }
         }
     </style>
 </head>
@@ -139,7 +148,7 @@
             <section class="bg-surface">
                 <!-- Product Image -->
                 <div>
-                    <img src="https://iili.io/Kf4lZAJ.jpg" alt="Sun Purified Himalayan Shilajit in a jar on a dark slate surface" class="w-full h-auto">
+                    <img src="https://iili.io/Kf4lZAJ.jpg" alt="Sun Purified Himalayan Shilajit in a jar on a dark slate surface" class="w-full h-auto" loading="lazy">
                 </div>
                  <!-- Product Details -->
                 <div class="container mx-auto px-4 sm:px-6 py-16 md:py-24 text-center">
@@ -204,7 +213,7 @@
                     <div class="max-w-3xl mx-auto">
                         <!-- Brand logo again -->
                          <div class="logo-container mx-auto mb-6 fade-in-up">
-                             <img src="http://googleusercontent.com/file_content/0" alt="Asanoha Wellness Logo" onerror="this.onerror=null;this.src='https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS';">
+                             <img src="http://googleusercontent.com/file_content/0" alt="Asanoha Wellness Logo" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/300x100/2A3A5B/ffffff?text=ASANOHAWELLNESS';">
                         </div>
                         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 fade-in-up delay-1">Purity in Every Drop</h2>
                         <p class="text-muted leading-relaxed fade-in-up delay-2">At Asanoha Wellness, our philosophy is simple: nature provides the ultimate path to well-being. We honor this by using a time-honored, sun-driven purification process, avoiding harsh solvents and high heat. This gentle method preserves the vital nutrients of Shilajit, ensuring you receive a product that is as pure and powerful as the mountains it came from.</p>
